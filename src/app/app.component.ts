@@ -87,9 +87,14 @@ export class AppComponent {
   mprecio: number = 0
 
   onBuscar(){
+
+    this.i = 0
+    this.repetir = true
+
     this.prI = 0
     this.mid = 0
     this.mcodigo  = ""
+    this.bnombre = ""
     this.mnombre = ""
     this.mdetalles  = ""
     this.mprecio  = 0
@@ -97,17 +102,45 @@ export class AppComponent {
     if (this.bid <= 0){
       console.log("Error, ID no válida")
     }else{
-      if (this.bid > Productos.length){
-        console.log("Error, ID de Producto no encontrada")
-      }else{
-        console.log("Producto enoontrado")
-        this.prI = this.bid-1
-        this.mid = Productos[this.prI].id
-        this.mcodigo = Productos[this.prI].codigo
-        this.bnombre = Productos[this.prI].nombre
-        this.mnombre = Productos[this.prI].nombre
-        this.mdetalles = Productos[this.prI].detalles
-        this.mprecio = Productos[this.prI].precio
+      while (this.repetir){
+        if (this.i == Productos.length){
+          console.log("Error, ID de Producto no encontrada")
+          this.repetir = false
+        }else if(Productos[this.i].id == this.bid){
+          console.log(Productos[this.i].id+" - "+this.bid)
+          console.log("Producto enoontrado")
+          this.prI = this.i
+          this.mid = Productos[this.i].id
+          this.mcodigo = Productos[this.i].codigo
+          this.bnombre = Productos[this.i].nombre
+          this.mnombre = Productos[this.i].nombre
+          this.mdetalles = Productos[this.i].detalles
+          this.mprecio = Productos[this.i].precio
+          this.repetir = false
+        }
+        this.i++
+      }
+    }
+  }
+
+  onBorrar(){
+    this.i = 0
+    this.repetir = true
+
+    if (this.bid <= 0){
+    console.log("Error, ID no válida")
+    }else{
+      while (this.repetir){
+        if (this.i == Productos.length){
+          console.log("Error, ID de Producto no encontrada")
+          this.repetir = false
+        }else if(Productos[this.i].id == this.bid){
+          Productos.splice(this.i,1)
+          console.log("Producto borrado con éxito")
+          console.table(Productos)
+          this.repetir = false
+        }
+        this.i++
       }
     }
   }
@@ -137,10 +170,6 @@ export class AppComponent {
         }
         this.i++
       }
-      // Productos[this.prI].nombre = this.mnombre
-      // Productos[this.prI].detalles = this.mdetalles
-      // Productos[this.prI].precio = this.mprecio
-      // console.log("Datos actualizados")
     }
 
     console.table(Productos)
