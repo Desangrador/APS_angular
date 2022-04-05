@@ -8,11 +8,14 @@ import { Producto, Productos, Lote, Lotes } from './Interfaces';
 })
 export class AppComponent {
   title = 'Almacén';
+
+  // Atributos Temporales
   adminusuario: string = "admin"
   admincontraseña: string = "1234"
   i: number = 0
   repetir: boolean = true
 
+  // Atributos de un Producto Nuevo
   acodigo: string = ""
   anombre: string = ""
   adetalles: string = ""
@@ -84,8 +87,8 @@ export class AppComponent {
   mprecio: number = 0
 
   onBuscar(){
-
-    
+    this.prI = 0
+    this.mid = 0
     this.mcodigo  = ""
     this.mnombre = ""
     this.mdetalles  = ""
@@ -93,15 +96,15 @@ export class AppComponent {
 
     if (this.bid <= 0){
       console.log("Error, ID no válida")
-      this.mid = 0
     }else{
       if (this.bid > Productos.length){
         console.log("Error, ID de Producto no encontrada")
       }else{
         console.log("Producto enoontrado")
-        this.prI = Productos.length-1
+        this.prI = this.bid-1
         this.mid = Productos[this.prI].id
         this.mcodigo = Productos[this.prI].codigo
+        this.bnombre = Productos[this.prI].nombre
         this.mnombre = Productos[this.prI].nombre
         this.mdetalles = Productos[this.prI].detalles
         this.mprecio = Productos[this.prI].precio
@@ -110,15 +113,36 @@ export class AppComponent {
   }
 
   onModificar(){
-    if (this.acodigo == "" || this.anombre == "" || this.adetalles == "" || this.aprecio <= 0){
+
+    this.repetir = true;
+    this.i = 0;
+
+    if (this.mcodigo == "" || this.mnombre == "" || this.mdetalles == "" || this.mprecio <= 0){
       console.log("No se puede modificar el producto, uno o más campos no contienen datos")
     }else if(this.mnombre == Productos[this.prI].nombre && this.mdetalles == Productos[this.prI].detalles && this.mprecio == Productos[this.prI].precio){
-      console.log("NO ha realizado algún cambio notable sobre el producto, Operación cancelada")
+      console.log("No ha realizado algún cambio notable sobre el producto, Operación cancelada")
     }else{
-      Productos[this.prI].nombre = this.mnombre
-      Productos[this.prI].detalles = this.mdetalles
-      Productos[this.prI].precio = this.mprecio
-      console.log("Datos actualizados")
+      while (this.repetir){
+        if (this.i == Productos.length){
+          Productos[this.prI].nombre = this.mnombre
+          Productos[this.prI].detalles = this.mdetalles
+          Productos[this.prI].precio = this.mprecio
+          this.repetir = false
+          console.log("Datos actualizados")
+        }else if (Productos[this.i].nombre == this.mnombre){
+          if (this.prI != this.i ){
+            console.log("Error, no se puede modificar el Producto por que el nombre y/o código ya existen")
+            this.repetir = false
+          }
+        }
+        this.i++
+      }
+      // Productos[this.prI].nombre = this.mnombre
+      // Productos[this.prI].detalles = this.mdetalles
+      // Productos[this.prI].precio = this.mprecio
+      // console.log("Datos actualizados")
     }
+
+    console.table(Productos)
   }
 }
