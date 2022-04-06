@@ -77,12 +77,11 @@
     </div>
   </div>
 </div>
-<!-- Buscar un Producto -->
+<!-- Buscar y Borrar un Producto -->
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-1 col-xl-3">
-    </div>
+    <div class="col-1 col-xl-3"></div>
     <div class="col-10 col-xl-6">
       <div class="form-registro">
         <h1 class = "txtcentro">Buscar Producto</h1>
@@ -98,13 +97,12 @@
             <div class="col-9"><input class = "form-control" disabled = "true" [(ngModel)]="bnombre" type="text"></div>
           </div>          
         </div>
-        <button type="submit" class="button" (click)="onBuscar()">BuscarProducto</button>
-        <button type="submit" class="button" (click)="onBorrar()">BorrarProducto</button>
+        <button type="submit" class="button" (click)="onBuscar()">Buscar Producto</button>
+        <button type="submit" class="button" (click)="onBorrar()">Borrar Producto</button>
       </div>
     </div>
 
-    <div class="col-1 col-xl-3">
-    </div>
+    <div class="col-1 col-xl-3"></div>
   </div>
 </div>
 
@@ -159,4 +157,33 @@
     <div class="col-1 col-xl-3">
     </div>
   </div>
+</div>
+<div class="container-fluid">
+  <div class="row">
+    <h1 class="invi"> espacio para la tabla</h1>
+  </div>
+    <div class="table-list">
+      <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">ID</th>
+            <th scope="col">Código</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Detalles</th>
+            <th scope="col">Precio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let Producto of ListaProductos(); index as i">
+            <th scope=""></th>
+            <td>{{ Producto.id }}</td>
+            <td>{{ Producto.codigo }}</td>
+            <td>{{ Producto.nombre }}</td>
+            <td>{{ Producto.detalles }}</td>
+            <td>{{ Producto.precio }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>

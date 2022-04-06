@@ -21,6 +21,10 @@ export class AppComponent {
   adetalles: string = ""
   aprecio: number = 0
 
+  ListaProductos(): Producto[]{
+    return Productos;
+  }
+
 
   onCrearPRoducto(){
 
@@ -143,6 +147,14 @@ export class AppComponent {
         this.i++
       }
     }
+    this.bid = 0
+    this.bnombre = ""
+    
+    this.mid = 0
+    this.mcodigo  = ""
+    this.mnombre = ""
+    this.mdetalles  = ""
+    this.mprecio  = 0
   }
 
   onModificar(){
