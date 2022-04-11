@@ -23,18 +23,17 @@
   </div>
 </nav>
 
-<!-- Agregar un Producto -->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-1 col-xl-3">
-    </div>
-    <div class="col-10 col-xl-6">
+    <div class="col-6">
+
+      <!-- Agregar/Modificar un Producto -->
       <div class="form-registro">
-        <h1 class = "txtcentro"> Agregar un nuevo Producto</h1>
+        <h1 class = "txtcentro" id="agregar">{{titulo}}</h1>
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class="labels">ID del Producto</label></div>
-            <div class="col-9"><input type="text" class="form-control" disabled = "true"></div>
+            <div class="col-9"><input type="text" class="form-control" disabled [(ngModel)]="getAltProducto().id"></div>
           </div>
           <div class="row">
             <div class="col-3"></div>
@@ -44,146 +43,101 @@
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class="labels">Código</label></div>
-            <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="acodigo"></div>
+            <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="getAltProducto().codigo"></div>
           </div>
         </div>
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class= "labels">Nombre</label></div>
-            <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="anombre"></div>
+            <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="getAltProducto().nombre"></div>
           </div>          
         </div>
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class="labels">Detalles</label></div>
-            <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="adetalles"></div>
+            <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="getAltProducto().detalles"></div>
           </div>
         </div>
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class="labels">Precio</label></div>
-            <div class="col-9"><input type="text" class="form-control"[(ngModel)]="aprecio"></div>
+            <div class="col-9"><input type="text" class="form-control"[(ngModel)]="getAltProducto().precio"></div>
           </div>
           <div class="row">
             <div class="col-3"></div>
             <div class="col-9"><div class="form-text">El precio está en Soles (S/.)</div></div>
           </div>
         </div>
-        <button type="submit" class="button" (click)="onCrearPRoducto()">Registrar Producto</button>
+        <div class="row">
+          <div class="col-6">
+            <button type="submit" class="button" (click)="onCrearProducto2()">Registrar Producto</button>
+          </div>
+          <div class="col-6">
+            <button type="submit" class="button" (click)="ModificarProducto()">Actualizar Producto</button>
+          </div>
+        </div>
       </div>
-    </div>
 
-    <div class="col-1 col-xl-3">
-    </div>
-  </div>
-</div>
-<!-- Buscar y Borrar un Producto -->
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-1 col-xl-3"></div>
-    <div class="col-10 col-xl-6">
+      <!-- Buscar un Producto -->
       <div class="form-registro">
         <h1 class = "txtcentro">Buscar Producto</h1>
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class="labels">ID del Producto</label></div>
-            <div class="col-9"><input type="text" class="form-control" [(ngModel)]="bid" ></div>
+            <div class="col-9"><input type="text" class="form-control" [(ngModel)]="getBscProducto().id" ></div>
           </div>
         </div>
         <div class="mb-3">
           <div class="row">
             <div class="col-3"><label class= "labels">Nombre</label></div>
-            <div class="col-9"><input class = "form-control" disabled = "true" [(ngModel)]="bnombre" type="text"></div>
+            <div class="col-9"><input class = "form-control" disabled = "true" [(ngModel)]="getBscProducto().nombre" type="text"></div>
           </div>          
         </div>
-        <button type="submit" class="button" (click)="onBuscar()">Buscar Producto</button>
-        <button type="submit" class="button" (click)="onBorrar()">Borrar Producto</button>
+        <div class="row">
+          <div class="col-4">
+            <button type="submit" class="button" (click)="onBuscar2()">Buscar Producto</button>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="button" (click)="onModificar2()">Modificar Producto</button>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="button" (click)="onBorrar2()">Borrar Producto</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      <!-- Tabla de Productos-->
+    <div class="col-6">
+      <div class="table-list">
+        <table class="table table-success table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">ID</th>
+              <th scope="col">Código</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Detalles</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let Producto of ListaProductos(); index as i">
+              <th scope=""></th>
+              <td>{{ Producto.id }}</td>
+              <td>{{ Producto.codigo }}</td>
+              <td>{{ Producto.nombre }}</td>
+              <td>{{ Producto.detalles }}</td>
+              <td>{{ Producto.precio }}</td>
+              <td><button class="btn btn-warning" (click) = "onModificarProductoTabla(i)"><img src="../assets/pencil-square.svg" alt=""></button></td>
+              <td><button class="btn btn-danger" (click) = "onBorrarTabla(i)"><img src="../assets/trash.svg" alt=""></button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
-    <div class="col-1 col-xl-3"></div>
   </div>
-</div>
-
-
-
-<!-- Modificar un Producto -->
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-1 col-xl-3">
-    </div>
-    <div class="col-10 col-xl-6">
-      <div class="form-registro">
-        <h1 class = "txtcentro">modificar Producto</h1>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-3"><label class="labels">ID del Producto</label></div>
-            <div class="col-9"><input class = "form-control" type = "text" disabled = "true" [(ngModel)]="mid"></div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-3"><label class="labels">Código</label></div>
-            <div class="col-9"><input class = "form-control" type = "text" disabled = "true" [(ngModel)]="mcodigo"></div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-3"><label class= "labels">Nombre</label></div>
-            <div class="col-9"><input class = "form-control" type ="text" [(ngModel)]="mnombre"></div>
-          </div>          
-        </div>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-3"><label class="labels">Detalles</label></div>
-            <div class="col-9"><input class = "form-control" type ="text" [(ngModel)]="mdetalles"></div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <div class="row">
-            <div class="col-3"><label class="labels">Precio</label></div>
-            <div class="col-9"><input class = "form-control" type ="text" [(ngModel)]="mprecio"></div>
-          </div>
-          <div class="row">
-            <div class="col-3"></div>
-            <div class="col-9"><div class="form-text">El precio está en Soles (S/.)</div></div>
-          </div>
-        </div>
-        <button type="submit" class="button" (click) = "onModificar()" >Modificar Producto</button>
-      </div>
-    </div>
-
-    <div class="col-1 col-xl-3">
-    </div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="row">
-    <h1 class="invi"> espacio para la tabla</h1>
-  </div>
-    <div class="table-list">
-      <table class="table table-success table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">ID</th>
-            <th scope="col">Código</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Detalles</th>
-            <th scope="col">Precio</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let Producto of ListaProductos(); index as i">
-            <th scope=""></th>
-            <td>{{ Producto.id }}</td>
-            <td>{{ Producto.codigo }}</td>
-            <td>{{ Producto.nombre }}</td>
-            <td>{{ Producto.detalles }}</td>
-            <td>{{ Producto.precio }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
 </div>
