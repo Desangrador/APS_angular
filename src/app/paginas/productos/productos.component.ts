@@ -11,6 +11,10 @@ export class ProductosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ListaProductos(): Producto[]{
+    return Productos
+  }
+
   altProducto: Producto = {
     id: 0,
     codigo: "",
@@ -202,9 +206,5 @@ export class ProductosComponent implements OnInit {
     this.altProducto.precio = seleccion.precio
 
     this.bscProducto = this.setAltProductoVacio()
-  }
-
-  ListaProductos(): Producto[]{
-    return Productos;
   }
 }

@@ -1,1 +1,70 @@
-<h1>interfaz de lotes</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <div class="form-registro">
+                <h1 class = "txtcentro">Agregar un Lote de Productos</h1>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-3"><label class="labels">ID del Lote</label></div>
+                        <div class="col-9"><input type="text" disabled class="form-control"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9"><div class="form-text">El ID del lote se genera automáticamente</div></div>
+                    </div>                    
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-3"><label class="labels">Cantidad</label></div>
+                        <div class="col-9"><input class = "form-control" type="text"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-3"><label class="labels">Fecha de Vencimiento</label></div>
+                        <div class="col-9"><input class = "form-control" type="date"></div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-3"><label class="labels">Producto</label></div>
+                        <div class="col-9"><input class = "form-control" type="text"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3"></div>
+                        <div class="col-9"><div class="form-text">El código del producto va aquí</div></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="button">Registrar Lote</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="table-list">
+                <table class="table table-success table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Fecha Venc.</th>
+                        <th scope="col">Producto</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let Lote of listarLotes(); index as i">
+                        <th scope=""></th>
+                        <td>{{ Lote.id }}</td>
+                        <td>{{ Lote.cantidadDisponible }}</td>
+                        <td>{{ Lote.fechaVencimientoProducto }}</td>
+                        <td>{{ Lote.contieneProducto.nombre }}</td>
+                        <td><button class="btn btn-warning"><img src="../assets/pencil-square.svg" alt=""></button></td>
+                        <td><button class="btn btn-danger"><img src="../assets/trash.svg" alt=""></button></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>      
+    </div>
+</div>
