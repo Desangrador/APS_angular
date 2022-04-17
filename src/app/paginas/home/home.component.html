@@ -1,15 +1,15 @@
 <!-- El Menu de arriba -->
 <nav class="navbar navbar-light" style="background-color: #cad2c5">
     <div class="container-fluid">
-      <a class="navbar-brand" href='home/pedidos'>
+      <a class="navbar-brand" routerLink='pedidos'>
         <img src="../assets/box.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
         Pedidos
       </a>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="">
         <img src="../assets/card-checklist.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
         Facturas
       </a>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" routerLink="">
         <img src="../assets/currency-dollar.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
         Ventas
       </a>
@@ -19,10 +19,9 @@
         <img src="../assets/boxes.svg" alt="" width="30" height="24" class="d-inline-block align-text-top" />
         Almacén</a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href='home/productos'>Productos</a></li>
-          <li><a class="dropdown-item" href='home/lotes'>Lotes</a></li>
+          <li><a class="dropdown-item" routerLink="productos">Productos</a></li>
+          <li><a class="dropdown-item" routerLink="lotes">Lotes</a></li>
         </ul>
       </li>
-      
     </div>
   </nav>

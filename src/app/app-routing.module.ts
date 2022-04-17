@@ -1,34 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './paginas/home/home.component';
 import { LotesComponent } from './paginas/lotes/lotes.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { ProductosComponent } from './paginas/productos/productos.component';
 
 const rutas: Routes = [
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home/productos',
+    path: 'productos',
     component: ProductosComponent
   },
   {
-    path: 'home/lotes',
+    path: 'lotes',
     component: LotesComponent
   },
   {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: 'home/pedidos',
+    path: 'pedidos',
     component: PedidosComponent
   }
 ]
-
 @NgModule({
   declarations: [],
   imports: [ RouterModule.forRoot(rutas) ],
