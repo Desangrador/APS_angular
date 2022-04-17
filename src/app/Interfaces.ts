@@ -53,3 +53,11 @@ export let DetallesDelPedido: DetallePedido[]=[];
 export let DetallesDeAtencion: DetalleAtencion[]=[];
 export let Lotes: Lote[]=[];
 export let Productos: Producto[]=[];
+
+//Interfaces alternativas
+export interface Pedido2 {
+    supermercado: string
+    producto: string
+    cantidad: number
+    fecha: string
+}

@@ -3,14 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from './app-routing.module';
+import { LotesComponent } from './paginas/lotes/lotes.component';
+import { ProductosComponent } from './paginas/productos/productos.component';
+import { HomeComponent } from './paginas/home/home.component';
+import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LotesComponent,
+    ProductosComponent,
+    HomeComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
