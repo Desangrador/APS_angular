@@ -8,6 +8,7 @@ import { LotesComponent } from './paginas/lotes/lotes.component';
 import { ProductosComponent } from './paginas/productos/productos.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
+import { FacturasComponent } from './paginas/facturas/facturas.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PedidosComponent } from './paginas/pedidos/pedidos.component';
     LotesComponent,
     ProductosComponent,
     HomeComponent,
-    PedidosComponent
+    PedidosComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,

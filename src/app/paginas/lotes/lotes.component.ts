@@ -11,25 +11,6 @@ export class LotesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //Productos temporales
-  pr1: Producto = {
-    id: 1,
-    codigo: "T001",
-    nombre: "Té, canela y clavo x25",
-    detalles: "Caja de Té tradicional con 25 sobres",
-    precio: 10,
-    estaIncluidoEnLotes: []
-  }
-  pr2: Producto = {
-    id: 2,
-    codigo: "T002",
-    nombre: "Té, canela y clavo x50",
-    detalles: "Caja de Té tradicional con 50 sobres",
-    precio: 18,
-    estaIncluidoEnLotes: []
-  }
-  //Fin Productos temporales
-
   //Producto vacio
   prvacio: Producto = {
     id: 0,

@@ -61,3 +61,13 @@ export interface Pedido2{
     cantidad: number
     fecha: string
 }
+
+export interface Factura2 {
+    codigo: string
+    DNI: string
+    supermercado: string
+    formaPay: string
+    fecha: string
+    descripcion: string
+    importe:string
+}
