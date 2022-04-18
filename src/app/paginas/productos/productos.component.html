@@ -8,7 +8,7 @@
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class="labels">ID del Producto</label></div>
-              <div class="col-9"><input type="text" class="form-control" disabled [(ngModel)]="getAltProducto().id"></div>
+              <div class="col-9"><input type="text" class="form-control" disabled [(ngModel)]="altProducto.id"></div>
             </div>
             <div class="row">
               <div class="col-3"></div>
@@ -18,25 +18,25 @@
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class="labels">Código</label></div>
-              <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="getAltProducto().codigo"></div>
+              <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="altProducto.codigo"></div>
             </div>
           </div>
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class= "labels">Nombre</label></div>
-              <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="getAltProducto().nombre"></div>
+              <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="altProducto.nombre"></div>
             </div>          
           </div>
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class="labels">Detalles</label></div>
-              <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="getAltProducto().detalles"></div>
+              <div class="col-9"><input class = "form-control" type="text" [(ngModel)]="altProducto.detalles"></div>
             </div>
           </div>
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class="labels">Precio</label></div>
-              <div class="col-9"><input type="text" class="form-control"[(ngModel)]="getAltProducto().precio"></div>
+              <div class="col-9"><input type="text" class="form-control"[(ngModel)]="altProducto.precio"></div>
             </div>
             <div class="row">
               <div class="col-3"></div>
@@ -59,13 +59,13 @@
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class="labels">ID del Producto</label></div>
-              <div class="col-9"><input type="text" class="form-control" [(ngModel)]="getBscProducto().id" ></div>
+              <div class="col-9"><input type="text" class="form-control" [(ngModel)]="bscProducto.id" ></div>
             </div>
           </div>
           <div class="mb-3">
             <div class="row">
               <div class="col-3"><label class= "labels">Nombre</label></div>
-              <div class="col-9"><input class = "form-control" disabled = "true" [(ngModel)]="getBscProducto().nombre" type="text"></div>
+              <div class="col-9"><input class = "form-control" disabled = "true" [(ngModel)]="bscProducto.nombre" type="text"></div>
             </div>          
           </div>
           <div class="row">

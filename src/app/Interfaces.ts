@@ -55,7 +55,7 @@ export let Lotes: Lote[]=[];
 export let Productos: Producto[]=[];
 
 //Interfaces alternativas
-export interface Pedido2 {
+export interface Pedido2{
     supermercado: string
     producto: string
     cantidad: number

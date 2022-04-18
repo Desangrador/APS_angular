@@ -32,13 +32,6 @@ export class ProductosComponent implements OnInit {
     estaIncluidoEnLotes: []
   }
 
-  getAltProducto(): Producto{
-    return this.altProducto
-  }
-  getBscProducto(): Producto{
-    return this.bscProducto
-  }
-
   setAltProductoVacio(): Producto{
     return {
       id: 0,
@@ -65,7 +58,7 @@ export class ProductosComponent implements OnInit {
     this.i = 0;
 
     //No deben de haber campo vacíos
-    if (this.getAltProducto().codigo == "" || this.getAltProducto().nombre == "" || this.getAltProducto().detalles == "" || this.getAltProducto().precio == 0){
+    if (this.altProducto.codigo == "" || this.altProducto.nombre == "" || this.altProducto.detalles == "" || this.altProducto.precio == 0){
       console.log("No se puede crear el producto, uno o más campos no contienen datos")
     }else{
 
@@ -83,7 +76,7 @@ export class ProductosComponent implements OnInit {
           this.id++;
           this.altProducto.id = this.id;
 
-          Productos.push(this.getAltProducto())
+          Productos.push(this.altProducto)
           console.log("Producto creado con éxito")
 
           this.repetir = false;

@@ -6,7 +6,7 @@
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-3"><label class="labels">ID del Lote</label></div>
-                        <div class="col-9"><input type="text" disabled class="form-control"></div>
+                        <div class="col-9"><input type="text" disabled class="form-control" [(ngModel)] = "altLote.id"></div>
                     </div>
                     <div class="row">
                         <div class="col-3"></div>
@@ -16,19 +16,19 @@
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-3"><label class="labels">Cantidad</label></div>
-                        <div class="col-9"><input class = "form-control" type="text"></div>
+                        <div class="col-9"><input class = "form-control" type="text" [(ngModel)] = "altLote.cantidadDisponible"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-3"><label class="labels">Fecha de Vencimiento</label></div>
-                        <div class="col-9"><input class = "form-control" type="date"></div>
+                        <div class="col-9"><input class = "form-control" type="date" [(ngModel)] = "altLote.fechaVencimientoProducto"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-3"><label class="labels">Producto</label></div>
-                        <div class="col-9"><input class = "form-control" type="text"></div>
+                        <div class="col-3"><label class = "labels">Producto</label></div>
+                        <div class="col-9"><input class = "form-control" type="text" [(ngModel)] = "prvacio.codigo"></div>
                     </div>
                     <div class="row">
                         <div class="col-3"></div>
@@ -36,7 +36,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <button type="submit" class="button">Registrar Lote</button>
+                    <div class="col-6"><button type="submit" class="button" (click) = "onRegistrar()">Registrar Lote</button></div>
+                    <div class="col-6"><button type="submit" class="button" (click) = "onActualizar()">Actualizar Lote</button></div>
                 </div>
             </div>
         </div>
@@ -50,6 +51,8 @@
                         <th scope="col">Cantidad</th>
                         <th scope="col">Fecha Venc.</th>
                         <th scope="col">Producto</th>
+                        <th scope="col">Editar</th>
+                        <th scope="col">Eliminar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,8 +62,8 @@
                         <td>{{ Lote.cantidadDisponible }}</td>
                         <td>{{ Lote.fechaVencimientoProducto }}</td>
                         <td>{{ Lote.contieneProducto.nombre }}</td>
-                        <td><button class="btn btn-warning"><img src="../assets/pencil-square.svg" alt=""></button></td>
-                        <td><button class="btn btn-danger"><img src="../assets/trash.svg" alt=""></button></td>
+                        <td><button class="btn btn-warning" (click) = "onModificarTabla(i)"><img src="../assets/pencil-square.svg" alt=""></button></td>
+                        <td><button class="btn btn-danger" (click) = "onBorrarTabla(i)"><img src="../assets/trash.svg" alt=""></button></td>
                     </tr>
                     </tbody>
                 </table>

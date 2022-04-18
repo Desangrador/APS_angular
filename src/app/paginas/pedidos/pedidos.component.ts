@@ -51,5 +51,6 @@ public pedido: Pedido2 = this.pedidoEmpty();
   
   onDelete(i: number): void {
     this.pedidos.splice(i, 1);
+    this.position = -1;
   }
 }
