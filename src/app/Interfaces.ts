@@ -71,3 +71,8 @@ export interface Factura2 {
     descripcion: string
     importe:string
 }
+export interface Venta {
+    cliente: string
+    fecha: string
+    monto: number
+}

@@ -9,6 +9,7 @@ import { ProductosComponent } from './paginas/productos/productos.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { FacturasComponent } from './paginas/facturas/facturas.component';
+import { VentasComponent } from './paginas/ventas/ventas.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FacturasComponent } from './paginas/facturas/facturas.component';
     ProductosComponent,
     HomeComponent,
     PedidosComponent,
-    FacturasComponent
+    FacturasComponent,
+    VentasComponent
   ],
   imports: [
     BrowserModule,

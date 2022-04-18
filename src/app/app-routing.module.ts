@@ -4,6 +4,7 @@ import { FacturasComponent } from './paginas/facturas/facturas.component';
 import { LotesComponent } from './paginas/lotes/lotes.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { ProductosComponent } from './paginas/productos/productos.component';
+import { VentasComponent } from './paginas/ventas/ventas.component';
 
 const rutas: Routes = [
   {
@@ -21,6 +22,10 @@ const rutas: Routes = [
   {
     path: 'facturas',
     component: FacturasComponent
+  },
+  {
+    path: 'ventas',
+    component: VentasComponent
   }
 ]
 @NgModule({
