@@ -10,6 +10,7 @@ import { HomeComponent } from './paginas/home/home.component';
 import { PedidosComponent } from './paginas/pedidos/pedidos.component';
 import { FacturasComponent } from './paginas/facturas/facturas.component';
 import { VentasComponent } from './paginas/ventas/ventas.component';
+import { TBproductosComponent } from './paginas/tablas/tbproductos/tbproductos.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { VentasComponent } from './paginas/ventas/ventas.component';
     HomeComponent,
     PedidosComponent,
     FacturasComponent,
-    VentasComponent
+    VentasComponent,
+    TBproductosComponent
   ],
   imports: [
     BrowserModule,

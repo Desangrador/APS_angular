@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Pedido2 } from 'src/app/Interfaces';
+import { Pedido2, Producto } from 'src/app/Interfaces';
+import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 
 @Component({
   selector: 'app-pedidos',
@@ -7,10 +8,14 @@ import { Pedido2 } from 'src/app/Interfaces';
   styleUrls: [ '../../app.component.css' ]
 })
 export class PedidosComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private svcProductos: SvcProductosService
+  ) { }
   ngOnInit(): void {
   }
-
+ListaProductos(): Producto[]{
+  return this.svcProductos.getProductos()
+}
 public pedido: Pedido2 = this.pedidoEmpty();
   public pedidos: Pedido2[] = [];
   public position: number = -1;

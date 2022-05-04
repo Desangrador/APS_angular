@@ -1,3 +1,15 @@
+export interface Cliente{
+    id: number;
+    ruc: string;
+    dni: string;
+    nombre: string;
+    aPaterno: string;
+    aMaterno: string;
+    telefono: string;
+    tienePedidos: Pedido;
+    tieneFacturas: Factura
+}
+
 export interface Factura{
     id: number;
     codigo: string;
@@ -51,8 +63,6 @@ export let Facturas: Factura[]=[];
 export let Pedidos: Pedido[]=[];
 export let DetallesDelPedido: DetallePedido[]=[];
 export let DetallesDeAtencion: DetalleAtencion[]=[];
-export let Lotes: Lote[]=[];
-export let Productos: Producto[]=[];
 
 //Interfaces alternativas
 export interface Pedido2{

@@ -11,12 +11,7 @@
                         <div class="col-9">
                             <input class="form-control" type="list" list="supermercados" placeholder="Selecciona un Supermercado" [(ngModel)]="pedido.supermercado" />
                             <datalist id="supermercados">
-                              <option value="La Canasta"></option>
-                              <option value="Natura"></option>
-                              <option value="Orión"></option>
-                              <option value="Plaza Vea"></option>
-                              <option value="Tottus"></option>
-                              <option value="Wong"></option>
+                              <app-tbproductos *ngFor = "let Producto of ListaProductos()" [ProductoInput] = "Producto"></app-tbproductos>
                             </datalist>
                         </div>
                     </div>
@@ -27,17 +22,7 @@
                         <div class="col-9">
                             <input class="form-control" type="list" list="productos" placeholder="Selecciona un Producto" [(ngModel)]="pedido.producto" />
                             <datalist id="productos">
-                                <option value="Té verde x25"></option>
-                                <option value="Té verde x50"></option>
-                                <option value="Té verde agranel 250gr"></option>
-                                <option value="Té verde con stevia x25"></option>
-                                <option value="Té negro x25"></option>
-                                <option value="Té negro x50"></option>
-                                <option value="Té achiote x25"></option>
-                                <option value="Té digestivo x25"></option>
-                                <option value="Té con menta x25"></option>
-                                <option value="Buenas noches x25"></option>
-                                <option value="Chia 500gr"></option>
+                                <app-tbproductos *ngFor = "let Producto of ListaProductos()" [ProductoInput] = "Producto"></app-tbproductos>
                             </datalist>
                         </div>
                     </div>
