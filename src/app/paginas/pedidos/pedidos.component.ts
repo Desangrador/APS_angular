@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Pedido2, Producto } from 'src/app/Interfaces';
+import { Cliente, Pedido2, Producto, Clientes } from 'src/app/Interfaces';
 import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 
 @Component({
@@ -16,6 +16,12 @@ export class PedidosComponent implements OnInit {
 ListaProductos(): Producto[]{
   return this.svcProductos.getProductos()
 }
+
+
+ListaCliente(): Cliente[]{
+  return Clientes
+}
+
 public pedido: Pedido2 = this.pedidoEmpty();
   public pedidos: Pedido2[] = [];
   public position: number = -1;

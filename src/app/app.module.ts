@@ -12,6 +12,7 @@ import { FacturasComponent } from './paginas/facturas/facturas.component';
 import { VentasComponent } from './paginas/ventas/ventas.component';
 import { TBproductosComponent } from './paginas/tablas/tbproductos/tbproductos.component';
 import { ClienteComponent } from './paginas/cliente/cliente.component';
+import { TbclienteComponent } from './paginas/tablas/tbcliente/tbcliente.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ClienteComponent } from './paginas/cliente/cliente.component';
     FacturasComponent,
     VentasComponent,
     TBproductosComponent,
-    ClienteComponent
+    ClienteComponent,
+    TbclienteComponent
   ],
   imports: [
     BrowserModule,

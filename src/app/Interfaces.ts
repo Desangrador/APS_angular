@@ -6,8 +6,9 @@ export interface Cliente{
     aPaterno: string;
     aMaterno: string;
     telefono: string;
-    tienePedidos: Pedido;
-    tieneFacturas: Factura
+    correo: string;
+    tienePedidos: Pedido[];
+    tieneFacturas: Factura[]
 }
 
 export interface Factura{
@@ -15,7 +16,8 @@ export interface Factura{
     codigo: string;
     fechaEmision: Date;
     montoTotal: number;
-    pertenecePedido: Pedido;
+    perteneceCliente: Cliente;
+    pertenecePedido: Pedido
 }
 
 export interface Pedido{
@@ -63,6 +65,7 @@ export let Facturas: Factura[]=[];
 export let Pedidos: Pedido[]=[];
 export let DetallesDelPedido: DetallePedido[]=[];
 export let DetallesDeAtencion: DetalleAtencion[]=[];
+export let Clientes: Cliente[]=[];
 
 //Interfaces alternativas
 export interface Pedido2{
@@ -80,9 +83,4 @@ export interface Factura2 {
     fecha: string
     descripcion: string
     importe:string
-}
-export interface Venta {
-    cliente: string
-    fecha: string
-    monto: number
 }

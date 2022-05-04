@@ -6,12 +6,12 @@
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-3">
-                            <label class="labels" for="supermercados">Supermercado</label>
+                            <label class="labels" for="supermercados">Cliente</label>
                         </div>
                         <div class="col-9">
-                            <input class="form-control" type="list" list="supermercados" placeholder="Selecciona un Supermercado" [(ngModel)]="pedido.supermercado" />
+                            <input class="form-control" type="list" list="supermercados" placeholder="Selecciona un Clientes" [(ngModel)]="pedido.supermercado" />
                             <datalist id="supermercados">
-                              <app-tbproductos *ngFor = "let Producto of ListaProductos()" [ProductoInput] = "Producto"></app-tbproductos>
+                              <app-tbcliente *ngFor = "let cliente of ListaCliente()" [ClienteInput] = "cliente"></app-tbcliente>
                             </datalist>
                         </div>
                     </div>
