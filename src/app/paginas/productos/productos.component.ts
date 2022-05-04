@@ -85,7 +85,7 @@ export class ProductosComponent implements OnInit {
   }
 
   onBuscar2(){
-    this.svcProductos.buscarProducto(this.repetir, this.i, this.pos2, this.bscProducto)
+    this.pos2 = this.svcProductos.buscarProducto(this.repetir, this.i, this.pos2, this.bscProducto)
   }
 
   onBorrar2(){
@@ -103,7 +103,12 @@ export class ProductosComponent implements OnInit {
   onModificar2(){
     this.titulo = "Modificar un Producto"
     this.pos = this.pos2
-    this.altProducto = this.svcProductos.seleccionarProductoTabla(this.pos,this.altProducto)
-    this.reset()
+    if (this.pos2 == -1){
+      console.log ("Error, no hay el producto para modificar")
+      this.reset()
+    }else{
+      this.altProducto = this.svcProductos.seleccionarProductoTabla(this.pos,this.altProducto)
+      this.bscProducto = this.ProductoVacio()
+    }
   }
 }

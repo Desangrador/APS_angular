@@ -58,7 +58,6 @@ export class SvcProductosService {
   seleccionarProductoTabla(a:number, altProducto: Producto): Producto{
     // rellenar los datos
     let seleccion: Producto = this.Productos[a]
-
     altProducto.id = seleccion.id
     altProducto.codigo = seleccion.codigo
     altProducto.nombre = seleccion.nombre
@@ -99,7 +98,7 @@ export class SvcProductosService {
     }
   }
 
-  buscarProducto(repetir:boolean, i: number, pos2: number, bscProducto: Producto){
+  buscarProducto(repetir:boolean, i: number, pos2: number, bscProducto: Producto): number{
     if (bscProducto.id <= 0){
       console.log("Error, ID no válida")
     }else{
@@ -117,5 +116,6 @@ export class SvcProductosService {
         i++
       }
     }
+    return pos2
   }
 }
