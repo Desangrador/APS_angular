@@ -13,13 +13,17 @@ export class LotesComponent implements OnInit {
   constructor(
     private svcLotes: SvcLotesService,
     private svcProductos: SvcProductosService,
-    private APIlotesService: ApiAlprosurService
+    private APIservice: ApiAlprosurService
   ){}
 
   ngOnInit(): void {
-    this.APIlotesService.getLotesAPI().
+    this.APIservice.getLotesAPI().
     subscribe(data => {
       this.svcLotes.setLotes(data)
+    })
+    this.APIservice.getProductosAPI().
+    subscribe(data => {
+      this.svcProductos.setProductos(data)
     })
   }
   ListaProductos(): Producto[]{

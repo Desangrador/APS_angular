@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Lote, Producto } from '../Interfaces';
+import { ApiAlprosurService } from './API/api-alprosur.service';
 import { SvcProductosService } from './svc-productos.service';
 
 @Injectable({
@@ -7,7 +8,8 @@ import { SvcProductosService } from './svc-productos.service';
 })
 export class SvcLotesService {
   constructor(
-    private svcProductos: SvcProductosService
+    private svcProductos: SvcProductosService,
+    private APIservice: ApiAlprosurService
   ){}
 
   private Lotes: Lote[] = []
@@ -31,8 +33,15 @@ export class SvcLotesService {
   borrarDeTabla(i: number){
     let Productos2: Producto[] = this.svcProductos.getProductos();
     if (this.svcProductos.getProductos()[i].estaIncluidoEnLotes.length == 0){
+      //Borrado de Productos en la API/BD
+      this.APIservice.delProductoAPI(Productos2[i].id).subscribe(data => {
+        console.log(data)
+      })
+
+      //Borrado de Productos en Angular
       Productos2.splice(i,1)
       this.svcProductos.setProductos(Productos2)
+
       console.log("Producto borrado con éxito")
     }else{
       let i2: number = 0
@@ -44,6 +53,12 @@ export class SvcLotesService {
           i2++;
         }
       }
+      //Borrado de Productos en la API/BD
+      this.APIservice.delProductoAPI(Productos2[i].id).subscribe(data => {
+        console.log(data)
+      })
+
+      //Borrado de Productos en Angular
       Productos2.splice(i,1)
       this.svcProductos.setProductos(Productos2)
       console.log("Producto borrado con éxito")
@@ -77,11 +92,20 @@ export class SvcLotesService {
             id++
             altLote.id = id
 
-            //agregar un nuevo producto
+            //Agregar lote en Angular
             this.Lotes.push(altLote)
-
             //agregar el Lote a Producto
             Productos2[i].estaIncluidoEnLotes.push(altLote)
+
+            //Agregar lote en la API/BD
+            let APIlote = {
+              cantidad: altLote.cantidad,
+              fechaVenc: altLote.fechaVenc,
+              productoId: altLote.productoId
+            }
+            this.APIservice.setNuevoLote(APIlote).subscribe(data => {
+              console.log(data)
+            })
             console.log("Lote añadido con éxito")
 
             repetir = false
@@ -107,7 +131,11 @@ export class SvcLotesService {
         i++
       }
     }
+    //Borrar lote de Angular
     this.Lotes.splice(l,1)
+    //Borrar lote de la API/BD
+    let APIlote = this.Lotes[l]
+    // this.APIservice
   }
 
   seleccionarLote(l: number, altLote: Lote): Lote{
@@ -123,9 +151,17 @@ export class SvcLotesService {
 
   seleccionarProductodeLote(l: number, prvacio: Producto): string{
     let seleccion: Lote = this.Lotes[l]
+    console.log(this.svcProductos.getProductos().length)
+    for (let i = 0; i < this.svcProductos.getProductos().length;i++){
+      if (seleccion.productoId == this.svcProductos.getProductos()[i].id){
 
-    prvacio.nombre = this.svcProductos.getProductos()[seleccion.productoId].nombre
+        console.log(seleccion.productoId)
+        console.log(this.svcProductos.getProductos()[i].id)
 
+        prvacio.nombre = this.svcProductos.getProductos()[i].nombre
+      }
+    }
+    console.log(prvacio.nombre)
     return prvacio.nombre
   }
 
@@ -146,8 +182,19 @@ export class SvcLotesService {
       //buscar si los productos son iguales
       //si son iguales entonces modificar
       if (this.svcProductos.getProductos()[altLote.productoId].nombre == prvacio.nombre){
+        //Actualizar Lote en angular
         this.Lotes[pos].cantidad = altLote.cantidad
         this.Lotes[pos].fechaVenc = altLote.fechaVenc
+
+        //Actualizar Lote en la API/BD
+        let APIlote ={
+          cantidad: altLote.cantidad,
+          fechaVenc: altLote.fechaVenc,
+          productoId: altLote.productoId
+        }
+        this.APIservice.actLoteAPI(APIlote,altLote.id).subscribe(data => {
+          console.log(data)
+        })
         console.log("El Lote ha sido modificado")
       }else{
       //si no son iguales se deberá de eliminar el Lote del producto en el que estaba antes y ponerlo en el nuevo producto

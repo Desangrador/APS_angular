@@ -10,6 +10,7 @@ export class SvcProductosService {
   private Productos: Producto[]=[];
 
   constructor(
+    private APIservice: ApiAlprosurService
   ){}
 
   //Metodo get
@@ -45,7 +46,18 @@ export class SvcProductosService {
           id++;
           altProducto.id = id;
 
+          //Nuevo Producto en Angular
           this.Productos.push(altProducto)
+          //Nuevo Producto en la API/BD
+          let APIproducto ={
+            codigo: altProducto.codigo,
+            nombre: altProducto.nombre,
+            detalles: altProducto.detalles,
+            precio: altProducto.precio
+          }
+          this.APIservice.setNuevoProductoAPI(APIproducto).subscribe(data =>{
+            console.log(data)
+          })
           console.log("Producto creado con éxito")
 
           repetir = false;
@@ -53,7 +65,6 @@ export class SvcProductosService {
         i++;
       }
     }
-    console.log(this.getProductos.length)
     return id
   }
 
@@ -83,9 +94,21 @@ export class SvcProductosService {
         while (repetir){
           if (i == this.Productos.length){
 
+            //Actualización en Angular
             this.Productos[pos].nombre = altProducto.nombre
             this.Productos[pos].detalles = altProducto.detalles
             this.Productos[pos].precio = altProducto.precio
+
+            //Actualización en la API/BD
+            let APIproducto = {
+              nombre: altProducto.nombre,
+              detalles: altProducto.detalles,
+              precio: altProducto.precio
+            }
+            this.APIservice.actProductoAPI(APIproducto,altProducto.id).subscribe(data =>{
+              console.log(data)
+            })
+
             repetir = false
             console.log("Datos actualizados")
           }else if (this.Productos[i].nombre == altProducto.nombre){
