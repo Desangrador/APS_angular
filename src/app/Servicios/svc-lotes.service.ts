@@ -9,10 +9,14 @@ export class SvcLotesService {
   constructor(
     private svcProductos: SvcProductosService
   ){}
-  
+
   private Lotes: Lote[] = []
   getLotes(): Lote[]{
     return this.Lotes
+  }
+
+  setLotes(lote: Lote[]){
+    this.Lotes = lote
   }
 
   //Borrar un producto (con sus lotes)
@@ -51,14 +55,14 @@ export class SvcLotesService {
     let Productos2: Producto[] = this.svcProductos.getProductos();
 
     //veriificar que ningún campo este vacío
-    if (altLote.cantidadDisponible == 0 || altLote.fechaVencimientoProducto == new Date("1970-01-02") || prvacio.nombre == "" ){
+    if (altLote.cantidad == 0 || altLote.fechaVenc == new Date("1970-01-02") || prvacio.nombre == "" ){
       console.log("Error al crear el lote, uno o más campos están vacíos")
     //que la cantidad no sea negativa
-    }else if (altLote.cantidadDisponible < 0){
+    }else if (altLote.cantidad < 0){
       console.log("La cantidad no puede ser negativa")
     //que la fecha no sea menor a la actual
-    }else if (altLote.fechaVencimientoProducto <= fechaAct){
-      console.log(altLote.fechaVencimientoProducto)
+    }else if (altLote.fechaVenc <= fechaAct){
+      console.log(altLote.fechaVenc)
       console.log("La fecha de vencimiento no es válida")
     }else{
       //Buscar el producto por codigo
@@ -68,11 +72,11 @@ export class SvcLotesService {
           repetir = false
         }else{
           if (Productos2[i].nombre == prvacio.nombre){
-            altLote.contieneProducto = Productos2[i]
+            altLote.productoId = Productos2[i].id
 
             id++
             altLote.id = id
-  
+
             //agregar un nuevo producto
             this.Lotes.push(altLote)
 
@@ -93,11 +97,11 @@ export class SvcLotesService {
 
   borrarLoteDeTabla(l: number, repetir: boolean, i: number){
     while (repetir){
-      if (i == this.Lotes[l].contieneProducto.estaIncluidoEnLotes.length){
+      if (i == this.svcProductos.getProductos()[this.Lotes[l].productoId].estaIncluidoEnLotes.length){
         repetir = false
         console.log ("Error Inesperado, no se encontró el lote a borrar")
-      }else if (this.Lotes[l].contieneProducto.estaIncluidoEnLotes[i].id == this.Lotes[l].id){
-        this.Lotes[l].contieneProducto.estaIncluidoEnLotes.splice(i,1)
+      }else if (this.svcProductos.getProductos()[this.Lotes[l].productoId].estaIncluidoEnLotes[i].id == this.Lotes[l].id){
+        this.svcProductos.getProductos()[this.Lotes[l].productoId].estaIncluidoEnLotes.splice(i,1)
         repetir = false;
       }else{
         i++
@@ -105,21 +109,22 @@ export class SvcLotesService {
     }
     this.Lotes.splice(l,1)
   }
-  
+
   seleccionarLote(l: number, altLote: Lote): Lote{
     let seleccion: Lote = this.Lotes[l]
-    
+
     altLote.id = seleccion.id
-    altLote.cantidadDisponible = seleccion.cantidadDisponible
-    altLote.fechaVencimientoProducto = seleccion.fechaVencimientoProducto
-    altLote.contieneProducto = seleccion.contieneProducto
-    
+    altLote.cantidad = seleccion.cantidad
+    altLote.fechaVenc = seleccion.fechaVenc
+    altLote.productoId = seleccion.productoId
+
     return altLote
   }
+
   seleccionarProductodeLote(l: number, prvacio: Producto): string{
     let seleccion: Lote = this.Lotes[l]
-    
-    prvacio.nombre = seleccion.contieneProducto.nombre
+
+    prvacio.nombre = this.svcProductos.getProductos()[seleccion.productoId].nombre
 
     return prvacio.nombre
   }
@@ -127,22 +132,22 @@ export class SvcLotesService {
   actualizarLote(repetir: boolean, pos: number, i: number, altLote: Lote, prvacio: Producto, fechaAct: Date){
     if (pos == -1){
       console.log("imposible modificar, el Lote no existe")
-    }else if (altLote.cantidadDisponible == 0 || altLote.fechaVencimientoProducto == new Date("1970-01-02") || prvacio.nombre == "" ){
+    }else if (altLote.cantidad == 0 || altLote.fechaVenc == new Date("1970-01-02") || prvacio.nombre == "" ){
       console.log("Error al modificar el lote, uno o más campos están vacíos")
     //que la cantidad no sea negativa
-    }else if (altLote.cantidadDisponible == this.Lotes[pos].cantidadDisponible && altLote.fechaVencimientoProducto == this.Lotes[pos].fechaVencimientoProducto && prvacio.nombre == this.Lotes[pos].contieneProducto.nombre){
+    }else if (altLote.cantidad == this.Lotes[pos].cantidad && altLote.fechaVenc == this.Lotes[pos].fechaVenc && prvacio.nombre == this.svcProductos.getProductos()[this.Lotes[pos].productoId].nombre){
       console.log("No ha realizado modificación alguna")
-    }else if (altLote.cantidadDisponible < 0){
+    }else if (altLote.cantidad < 0){
       console.log("La cantidad no puede ser negativa")
     //que la fecha no sea menor a la actual
-    }else if (altLote.fechaVencimientoProducto <= fechaAct){
+    }else if (altLote.fechaVenc <= fechaAct){
       console.log("La fecha de vencimiento no es válida")
     }else{
       //buscar si los productos son iguales
       //si son iguales entonces modificar
-      if (altLote.contieneProducto.nombre == prvacio.nombre){
-        this.Lotes[pos].cantidadDisponible = altLote.cantidadDisponible
-        this.Lotes[pos].fechaVencimientoProducto = altLote.fechaVencimientoProducto
+      if (this.svcProductos.getProductos()[altLote.productoId].nombre == prvacio.nombre){
+        this.Lotes[pos].cantidad = altLote.cantidad
+        this.Lotes[pos].fechaVenc = altLote.fechaVenc
         console.log("El Lote ha sido modificado")
       }else{
       //si no son iguales se deberá de eliminar el Lote del producto en el que estaba antes y ponerlo en el nuevo producto
@@ -159,10 +164,10 @@ export class SvcLotesService {
 
               //Buscar el lote en el viejo producto para quitarlo
               while (repetir2){
-                if (i2 == altLote.contieneProducto.estaIncluidoEnLotes.length){
+                if (i2 == this.svcProductos.getProductos()[altLote.productoId].estaIncluidoEnLotes.length){
                   repetir2 = false
-                }else if (altLote.contieneProducto.estaIncluidoEnLotes[i2].id == altLote.id){
-                  altLote.contieneProducto.estaIncluidoEnLotes.splice(i2,1)
+                }else if (this.svcProductos.getProductos()[altLote.productoId].estaIncluidoEnLotes[i2].id == altLote.id){
+                  this.svcProductos.getProductos()[altLote.productoId].estaIncluidoEnLotes.splice(i2,1)
                   repetir2 = false;
                 }else{
                   i2++
@@ -170,10 +175,10 @@ export class SvcLotesService {
               }
 
               //Actualizar datos
-              altLote.contieneProducto = this.svcProductos.getProductos()[i]
-              this.Lotes[pos].cantidadDisponible = altLote.cantidadDisponible
-              this.Lotes[pos].fechaVencimientoProducto = altLote.fechaVencimientoProducto
-              this.Lotes[pos].contieneProducto = altLote.contieneProducto
+              this.svcProductos.getProductos()[altLote.productoId] = this.svcProductos.getProductos()[i]
+              this.Lotes[pos].cantidad = altLote.cantidad
+              this.Lotes[pos].fechaVenc = altLote.fechaVenc
+              this.Lotes[pos].productoId = altLote.productoId
               this.svcProductos.getProductos()[i].estaIncluidoEnLotes.push(altLote)
 
               console.log("El Lote ha sido modificado")
@@ -183,7 +188,7 @@ export class SvcLotesService {
             }
           }
         }
-      }      
+      }
     }
   }
 }

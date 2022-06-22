@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http'
+
 import { LotesComponent } from './paginas/lotes/lotes.component';
 import { ProductosComponent } from './paginas/productos/productos.component';
 import { HomeComponent } from './paginas/home/home.component';
@@ -30,7 +32,8 @@ import { TbclienteComponent } from './paginas/tablas/tbcliente/tbcliente.compone
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

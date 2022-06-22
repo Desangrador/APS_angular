@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Lote, Producto} from 'src/app/Interfaces';
+import { ApiAlprosurService } from 'src/app/Servicios/API/api-alprosur.service';
 import { SvcLotesService } from 'src/app/Servicios/svc-lotes.service';
 import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 
@@ -11,9 +12,15 @@ import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 export class LotesComponent implements OnInit {
   constructor(
     private svcLotes: SvcLotesService,
-    private svcProductos: SvcProductosService
+    private svcProductos: SvcProductosService,
+    private APIlotesService: ApiAlprosurService
   ){}
+
   ngOnInit(): void {
+    this.APIlotesService.getLotesAPI().
+    subscribe(data => {
+      this.svcLotes.setLotes(data)
+    })
   }
   ListaProductos(): Producto[]{
     return this.svcProductos.getProductos()
@@ -44,10 +51,10 @@ export class LotesComponent implements OnInit {
 
   altLote: Lote = {
     id: 0,
-    cantidadDisponible: 0,
-    fechaVencimientoProducto: new Date("1970-01-02"),
+    cantidad: 0,
+    fechaVenc: new Date("1970-01-02"),
     estaIncluidoEnDetallesDeAtencion: [],
-    contieneProducto: this.prvacio
+    productoId: this.prvacio.id
   }
 
   //Instancias vacías
@@ -55,10 +62,10 @@ export class LotesComponent implements OnInit {
     //Lote
     this.altLote = {
       id: 0,
-      cantidadDisponible: 0,
-      fechaVencimientoProducto: new Date("1970-01-02"),
+      cantidad: 0,
+      fechaVenc: new Date("1970-01-02"),
       estaIncluidoEnDetallesDeAtencion: [],
-      contieneProducto: this.prvacio
+      productoId: this.prvacio.id
     }
     //Producto
     this.prvacio = {

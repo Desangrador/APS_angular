@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente, Clientes } from 'src/app/Interfaces';
+import { Cliente } from 'src/app/Interfaces';
+import { SvcClientesService } from 'src/app/Servicios/svc-clientes.service';
 
 @Component({
   selector: 'app-cliente',
@@ -7,39 +8,18 @@ import { Cliente, Clientes } from 'src/app/Interfaces';
   styleUrls: [ '../../app.component.css' ]
 })
 export class ClienteComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private svcClientes: SvcClientesService
+  ){}
   ngOnInit(): void {
+  }
+
+  ListaCliente(): Cliente[]{
+    return this.svcClientes.getClientes()
   }
 
   public cliente: Cliente = this.ClienteEmpty();
   public position: number = -1;
-
-  ListaCliente(): Cliente[]{
-    return Clientes;
-  }
-
-  
-  onDatos(): void {
-    if (this.position == -1) {
-      console.log(this.cliente);
-      Clientes.push(this.cliente);
-      this.cliente = this.ClienteEmpty();
-    } else {
-      let selection: Cliente = Clientes[this.position];
-      
-      selection.id = this.cliente.id
-      selection.ruc = this.cliente.ruc
-      selection.dni = this.cliente.dni
-      selection.nombre = this.cliente.nombre
-      selection.aPaterno = this.cliente.aPaterno
-      selection.aMaterno = this.cliente.aMaterno
-      selection.telefono = this.cliente.telefono
-      selection.correo = this.cliente.correo
-
-      this.cliente = this.ClienteEmpty();
-      this.position = -1;
-    }
-  }
 
   ClienteEmpty(): Cliente {
     return{
@@ -56,24 +36,21 @@ export class ClienteComponent implements OnInit {
     }
   }
 
-  onEdit(i: number): void {
-    //this.pedido = this.pedidos[i];
-    let selection: Cliente = Clientes[i];
-    
-    this.cliente.id = selection.id
-    this.cliente.ruc = selection.ruc
-    this.cliente.dni = selection.dni
-    this.cliente.nombre = selection.nombre
-    this.cliente.aPaterno = selection.aPaterno
-    this.cliente.aMaterno = selection.aMaterno
-    this.cliente.telefono = selection.telefono
-    this.cliente.correo = selection.correo
+  onDatos(): void {
+    this.svcClientes.nuevoCliente(this.position,this.cliente)
+    this.position = -1;
+    this.cliente = this.ClienteEmpty();
+  }
 
+  
+
+  onEdit(i: number): void {
+    this.cliente = this.svcClientes.editarCliente(this.cliente,i)
     this.position = i;
   }
 
   onDelete(i: number): void{
-    Clientes.splice(i, 1);
+    this.svcClientes.borrarCliente(i)
     this.position = -1
   }
 

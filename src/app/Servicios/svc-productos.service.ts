@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Producto } from '../Interfaces';
+import { ApiAlprosurService } from './API/api-alprosur.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SvcProductosService {
-  constructor(
-  ){}
-
   //Matriz que almacena los datos
   private Productos: Producto[]=[];
+
+  constructor(
+  ){}
 
   //Metodo get
   getProductos(): Producto[]{
     return this.Productos
   }
+
   setProductos(producto: Producto[]){
     this.Productos = producto
   }
@@ -73,14 +75,14 @@ export class SvcProductosService {
 
       if (altProducto.codigo == "" || altProducto.nombre == "" || altProducto.detalles == "" || altProducto.precio <= 0){
         console.log("No se puede modificar el producto, uno o más campos no contienen datos")
-      }else if(altProducto.nombre == this.Productos[pos].nombre && 
+      }else if(altProducto.nombre == this.Productos[pos].nombre &&
                altProducto.detalles == this.Productos[pos].detalles &&
                altProducto.precio == this.Productos[pos].precio){
         console.log("No ha realizado algún cambio notable sobre el producto, Operación cancelada")
       }else{
         while (repetir){
           if (i == this.Productos.length){
-            
+
             this.Productos[pos].nombre = altProducto.nombre
             this.Productos[pos].detalles = altProducto.detalles
             this.Productos[pos].precio = altProducto.precio

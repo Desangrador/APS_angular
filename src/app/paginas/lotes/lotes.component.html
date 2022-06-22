@@ -11,18 +11,18 @@
                     <div class="row">
                         <div class="col-3"></div>
                         <div class="col-9"><div class="form-text">El ID del lote se genera automáticamente</div></div>
-                    </div>                    
+                    </div>
                 </div>
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-3"><label class="labels">Cantidad</label></div>
-                        <div class="col-9"><input class = "form-control" type="text" [(ngModel)] = "altLote.cantidadDisponible"></div>
+                        <div class="col-9"><input class = "form-control" type="text" [(ngModel)] = "altLote.cantidad"></div>
                     </div>
                 </div>
                 <div class="mb-3">
                     <div class="row">
                         <div class="col-3"><label class="labels">Fecha de Vencimiento</label></div>
-                        <div class="col-9"><input class = "form-control" type="date" [(ngModel)] = "altLote.fechaVencimientoProducto"></div>
+                        <div class="col-9"><input class = "form-control" type="date" [(ngModel)] = "altLote.fechaVenc"></div>
                     </div>
                 </div>
                 <div class="mb-3">
@@ -54,7 +54,7 @@
                         <th scope="col">ID</th>
                         <th scope="col">Cantidad</th>
                         <th scope="col">Fecha Venc.</th>
-                        <th scope="col">Producto</th>
+                        <th scope="col">Producto (ID)</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
                     </tr>
@@ -62,15 +62,15 @@
                     <tbody>
                     <tr *ngFor="let Lote of listarLotes(); index as i">
                         <td>{{ Lote.id }}</td>
-                        <td>{{ Lote.cantidadDisponible }}</td>
-                        <td>{{ Lote.fechaVencimientoProducto }}</td>
-                        <td>{{ Lote.contieneProducto.nombre }}</td>
+                        <td>{{ Lote.cantidad }}</td>
+                        <td>{{ Lote.fechaVenc }}</td>
+                        <td>{{ Lote.productoId }}</td>
                         <td><button class="btn btn-warning" (click) = "onModificarTabla(i)"><img src="../assets/pencil-square.svg" alt=""></button></td>
                         <td><button class="btn btn-danger" (click) = "onBorrarTabla(i)"><img src="../assets/trash.svg" alt=""></button></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
-        </div>      
+        </div>
     </div>
 </div>

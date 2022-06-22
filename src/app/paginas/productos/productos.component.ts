@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto } from 'src/app/Interfaces';
+import { ApiAlprosurService } from 'src/app/Servicios/API/api-alprosur.service';
 import { SvcLotesService } from 'src/app/Servicios/svc-lotes.service';
 import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 
@@ -11,12 +12,33 @@ import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 export class ProductosComponent implements OnInit {
   constructor(
     private svcProductos: SvcProductosService,
-    private svcLotes: SvcLotesService
+    private svcLotes: SvcLotesService,
+    private APIproductosService: ApiAlprosurService
   ){}
+
   ngOnInit(): void {
+    this.APIproductosService.getProductosAPI().
+    subscribe(data => {
+      //añadir estaIncluidoEnLotes
+      for (let i = 0; i < data.length; i++){
+        data[i].estaIncluidoEnLotes = []
+      }
+      this.svcProductos.setProductos(data)
+      //añadir todos los Lotes a cada producto
+      let lotesSueltos = this.svcLotes.getLotes()
+      for (let i = 0; i < data.length; i++){
+        for (let e = 0; e < lotesSueltos.length; e++){
+          if (lotesSueltos[e].productoId == data[i].id){
+            data[i].estaIncluidoEnLotes.push(lotesSueltos[e])
+          }
+        }
+      }
+      this.svcProductos.setProductos(data)
+    })
   }
 
   ListaProductos(): Producto[]{
+    console.log(this.svcProductos.getProductos())
     return this.svcProductos.getProductos()
   }
 

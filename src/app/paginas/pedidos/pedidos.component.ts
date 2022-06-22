@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cliente, Pedido2, Producto, Clientes } from 'src/app/Interfaces';
+import { Cliente, Pedido2, Producto } from 'src/app/Interfaces';
+import { SvcClientesService } from 'src/app/Servicios/svc-clientes.service';
 import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 
 @Component({
@@ -9,7 +10,8 @@ import { SvcProductosService } from 'src/app/Servicios/svc-productos.service';
 })
 export class PedidosComponent implements OnInit {
   constructor(
-    private svcProductos: SvcProductosService
+    private svcProductos: SvcProductosService,
+    private svcClientes: SvcClientesService
   ) { }
   ngOnInit(): void {
   }
@@ -19,7 +21,7 @@ ListaProductos(): Producto[]{
 
 
 ListaCliente(): Cliente[]{
-  return Clientes
+  return this.svcClientes.getClientes()
 }
 
 public pedido: Pedido2 = this.pedidoEmpty();

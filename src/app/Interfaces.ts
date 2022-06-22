@@ -47,10 +47,10 @@ export interface DetalleAtencion{
 
 export interface Lote{
     id: number;
-    cantidadDisponible: number;
-    fechaVencimientoProducto: Date;
+    cantidad: number;
+    fechaVenc: Date;
     estaIncluidoEnDetallesDeAtencion: DetalleAtencion[];
-    contieneProducto: Producto;
+    productoId: number;
 }
 
 export interface Producto{
@@ -65,7 +65,6 @@ export let Facturas: Factura[]=[];
 export let Pedidos: Pedido[]=[];
 export let DetallesDelPedido: DetallePedido[]=[];
 export let DetallesDeAtencion: DetalleAtencion[]=[];
-export let Clientes: Cliente[]=[];
 
 //Interfaces alternativas
 export interface Pedido2{
